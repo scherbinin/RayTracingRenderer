@@ -29,14 +29,6 @@ public class Renderer {
     * Return the time of calculations in milliseconds
     */
     public long renderCadre() {
-        //TODO: to be objective - we should have some view port abstraction here, which should be like a square
-        //TODO: which on we're doing projection of world. Viewport should declare conversion between real coordinate
-        //TODO: and pixels in cadr and scale between viewport's picture and real cadre.
-        //TODO:
-        //TODO: Currently i'm using following simplification:
-        //TODO: Scale is the same on real projection and on the cadre buffer
-        //TODO: I have simple conversion between real projection and cadre, that conversion
-        //TODO: is happening here: draw.Painter.setColorToLinearCadre(), I'll delete it in  a future
         long startTime = System.currentTimeMillis();
         calculateNewCadre();
         painter.paintCadre();
