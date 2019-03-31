@@ -5,5 +5,6 @@ package scene;
  */
 public enum FigureType {
     SPHERE,
-    ELIPSOID
+    ELIPSOID,
+    UNKNOWN
 }

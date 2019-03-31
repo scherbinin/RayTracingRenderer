@@ -12,6 +12,13 @@ public class Main {
         SceneContainer sceneContainer = new SceneContainer();
 
         Renderer renderer = new Renderer(painter, sceneContainer);
-        System.out.println(renderer.renderCadre());
+//        renderer.translate(1, 1.3, -2.5);
+//        renderer.rotate(10, -10, -30);
+
+        for (double i =0; i<5; i = i+ 0.1) {
+            renderer.translate(0, 0, (-1)*i);
+            System.out.println("Cadre render time= " + renderer.renderCadre());
+        }
+
     }
 }

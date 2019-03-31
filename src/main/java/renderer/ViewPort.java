@@ -1,5 +1,6 @@
 package renderer;
 
+import scene.primitives.Matrix;
 import scene.primitives.Point;
 import scene.primitives.Vector;
 
@@ -17,7 +18,6 @@ public class ViewPort {
 
 
     public ViewPort(Point camera, int outputFrameWidth, int outputFrameHeight, double zoom) {
-        //Initially we are going to look along Z axis
         this.camera = camera;
         this.distanceFromCamera = zoom;
         this.outputFrameWidth = outputFrameWidth;
@@ -27,12 +27,14 @@ public class ViewPort {
         this.UpBorderY = -outputFrameHeight / 2;
     }
 
-    public Vector getRayVector(int x, int y) {
+    public Vector getVectorFromCameraToViewPortPoint(int x, int y) {
         double realCoordinateX = (leftBorderX + x) * (1.0 / outputFrameWidth);
         double realCoordinateY = -(UpBorderY + y) * (1.0 / outputFrameHeight);
+        double realCoordinateZ = distanceFromCamera;
 
-        return new Vector(realCoordinateX, realCoordinateY, camera.getZ() + distanceFromCamera);
+        return (new Point(realCoordinateX, realCoordinateY, realCoordinateZ)).subtract(camera).toVector();
     }
+
 
     public int getOutputFrameWidth() {
         return outputFrameWidth;
@@ -40,5 +42,13 @@ public class ViewPort {
 
     public int getOutputFrameHeight() {
         return outputFrameHeight;
+    }
+
+    public Point getCameraPosition() {
+        return camera;
+    }
+
+    public double getDistanceFromCamera() {
+        return distanceFromCamera;
     }
 }

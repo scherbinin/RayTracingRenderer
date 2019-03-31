@@ -18,9 +18,7 @@ public class Painter {
     public Painter(int width, int height) {
         this.width = width;
         this.height = height;
-
         linearCadre = new ColorRGB[width * height];
-
         initWindow();
     }
 
@@ -39,18 +37,7 @@ public class Painter {
         canvas.drawCadre(linearCadre);
     }
 
-    public void paintPoint(int x, int y, ColorRGB color) {
-        setColorToLinearCadre(x, y, color);
-    }
-
     public void paint(int x, int y, ColorRGB color) {
         linearCadre[x + y * width] = color;
-    }
-
-    private void setColorToLinearCadre(int x, int y, ColorRGB color) {
-        int newX = x + canvas.getCenterX();
-        int newY = y + canvas.getCenterY();
-
-        linearCadre[newX + newY * width] = color;
     }
 }

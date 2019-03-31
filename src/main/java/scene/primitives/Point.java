@@ -1,5 +1,6 @@
 package scene.primitives;
 
+import javafx.beans.binding.ObjectExpression;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
@@ -46,24 +47,35 @@ public class Point {
     }
 
     public Point subtract(double x, double y, double z) {
-        //TODO implement it
-        throw new NotImplementedException();
+        return new Point(this.x - x, this.y - y, this.z - z);
+    }
+
+    public Point add(Point point) {
+        return new Point(this.x + point.getX(), this.y + point.getY(), this.z + point.getZ());
+    }
+
+    public Point add(double x, double y, double z) {
+        return new Point(this.x + x, this.y + y, this.z + z);
     }
 
     public Point multiply(double lamba) {
-        return new Point(x*lamba, y*lamba, z*lamba);
+        return new Point(this.x*lamba, this.y*lamba, this.z*lamba);
+    }
+
+    public Vector toVectorFromPoint(Point from) {
+        return toVectorFromPoint(from.getX(), from.getY(), from.getZ());
+    }
+
+    public Vector toVectorFromPoint(double x, double y, double z) {
+        return new Vector(this.x - x, this.y - y, this.z - z);
     }
 
     public Vector toVector() {
-        return toVector(0, 0, 0);
+        return new Vector(this.x, this.y, this.z);
     }
 
-    public Vector toVector(Point from) {
-        return toVector(from.getX(), from.getY(), from.getZ());
-    }
-
-    public Vector toVector(double x, double y, double z) {
-        return new Vector(this.x - x, this.y - y, this.z - z);
+    public Matrix toMatrix() {
+        return new Matrix(3, 1, new double[]{x, y, z});
     }
 
     @Override
@@ -71,5 +83,16 @@ public class Point {
         return "Point{ + " + x + ", " + y + ", " + z + " }";
     }
 
+    @Override
+    public boolean equals(Object vector) {
+        if(vector !=null && vector instanceof Vector) {
 
+            if (this.x == ((Vector)vector).getX() &&
+                    this.y == ((Vector)vector).getY() &&
+                    this.z == ((Vector)vector).getZ())
+                return true;
+        }
+
+        return false;
+    }
 }
